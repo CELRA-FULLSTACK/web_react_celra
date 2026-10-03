@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Badge,
   Button,
   Card,
   Form,
@@ -88,8 +87,8 @@ export const CustomerManagementPage: React.FC = () => {
     fetchCustomers(1, pagination.pageSize, search, statusFilter);
   };
 
-  const handleTableChange = (pag: { current: number; pageSize: number }) => {
-    fetchCustomers(pag.current, pag.pageSize, search, statusFilter);
+  const handleTableChange = (pag: { current?: number; pageSize?: number }) => {
+    fetchCustomers(pag.current || 1, pag.pageSize || 10, search, statusFilter);
   };
 
   const handleOpenCreate = () => {
@@ -220,7 +219,7 @@ export const CustomerManagementPage: React.FC = () => {
             key: 'action',
             width: 140,
             fixed: 'right' as const,
-            render: (_, record) => (
+            render: (_: unknown, record: Customer) => (
               <Space size="small">
                 <Button
                   type="text"

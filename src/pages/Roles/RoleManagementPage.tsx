@@ -35,7 +35,7 @@ import {
   updateRolePermissionsApi,
 } from '../../api/role.api';
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text } = Typography;
 
 const ALL_ACTIONS = ['VIEW', 'CREATE', 'UPDATE', 'DELETE'];
 
