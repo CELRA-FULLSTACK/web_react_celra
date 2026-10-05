@@ -10,8 +10,11 @@ import {
   Typography,
 } from 'antd';
 import {
+  AppstoreOutlined,
+  AuditOutlined,
   BankOutlined,
   DashboardOutlined,
+  FileDoneOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -42,8 +45,6 @@ export const MainLayout: React.FC = () => {
   // Chỉ hiển thị menu Nhân sự nếu có quyền employee:view hoặc là SYSTEM_ADMIN
   const canViewEmployees =
     user?.role === 'SYSTEM_ADMIN' || permissions.includes('employee:view');
-  const canViewCustomers =
-    user?.role === 'SYSTEM_ADMIN' || permissions.includes('customer:view');
   const canViewRoles =
     user?.role === 'SYSTEM_ADMIN' || permissions.includes('employee:view');
 
@@ -54,6 +55,30 @@ export const MainLayout: React.FC = () => {
       label: 'Bàn làm việc',
       onClick: () => navigate('/dashboard'),
     },
+    {
+      key: '/compliance/kanban',
+      icon: <AppstoreOutlined />,
+      label: 'Bảng Kanban Tuân thủ',
+      onClick: () => navigate('/compliance/kanban'),
+    },
+    {
+      key: '/compliance/assessment',
+      icon: <AuditOutlined />,
+      label: 'Đánh giá Tuân thủ AI',
+      onClick: () => navigate('/compliance/assessment'),
+    },
+    {
+      key: '/compliance/profile',
+      icon: <SafetyCertificateOutlined />,
+      label: 'Hồ sơ Tuân thủ Số',
+      onClick: () => navigate('/compliance/profile'),
+    },
+    {
+      key: '/compliance/documents',
+      icon: <FileDoneOutlined />,
+      label: 'Kho Bằng chứng Số',
+      onClick: () => navigate('/compliance/documents'),
+    },
     ...(canViewEmployees
       ? [
           {
@@ -61,16 +86,6 @@ export const MainLayout: React.FC = () => {
             icon: <TeamOutlined />,
             label: 'Quản lý Nhân sự',
             onClick: () => navigate('/employees'),
-          },
-        ]
-      : []),
-    ...(canViewCustomers
-      ? [
-          {
-            key: '/customers',
-            icon: <UserOutlined />,
-            label: 'Quản lý Khách hàng',
-            onClick: () => navigate('/customers'),
           },
         ]
       : []),
